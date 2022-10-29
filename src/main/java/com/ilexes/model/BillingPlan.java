@@ -24,7 +24,8 @@ public class BillingPlan {
     private String description;
     private BigDecimal price;
     @OneToMany(targetEntity = Application.class)
-    private Set<Application> applications;
+    @JoinTable
+    private Set<Application> applicationsIncluded;
     @Enumerated(EnumType.STRING)
     private SupportScope supportScope;
     private boolean isKnowledgeBaseIncluded;
