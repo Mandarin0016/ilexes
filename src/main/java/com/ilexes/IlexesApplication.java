@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class IlexesApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(IlexesApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(IlexesApplication.class, args);
+    }
 
 }
