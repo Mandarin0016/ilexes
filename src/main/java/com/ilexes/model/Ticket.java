@@ -30,7 +30,7 @@ public class Ticket {
     @Enumerated(EnumType.STRING)
     private State state;
     @JoinColumn(nullable = false)
-    @ManyToOne(targetEntity = Customer.class)
+    @ManyToOne(targetEntity = User.class)
     private Customer customer;
     @ManyToMany
     @JoinTable(
