@@ -1,5 +1,6 @@
 package com.ilexes.model;
 
+import com.ilexes.model.enums.Priority;
 import com.ilexes.model.enums.State;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -46,6 +47,10 @@ public class Ticket {
     @JoinColumn(nullable = false)
     @ManyToOne(targetEntity = Group.class)
     private Group supportGroup;
+    @Enumerated(EnumType.STRING)
+    private Priority priority;
+    @OneToOne(targetEntity = Survey.class)
+    private Survey survey;
     @CreatedDate
     private LocalDateTime created;
     @LastModifiedDate

@@ -17,7 +17,7 @@ public class Article {
     @EqualsAndHashCode.Include
     private Long id;
     private String title;
-    private String content;
+    private String articleUrl;
     @ManyToOne(targetEntity = KnowledgeBase.class, cascade = CascadeType.ALL)
     private KnowledgeBase knowledgeBase;
 }
