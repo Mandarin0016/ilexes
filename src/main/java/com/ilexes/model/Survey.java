@@ -22,7 +22,6 @@ public class Survey {
     @EqualsAndHashCode.Include
     private Long id;
     @OneToOne(mappedBy = "survey", targetEntity = Ticket.class)
-    @JoinColumn()
     private Ticket ticket;
     private String comment;
     @Enumerated(EnumType.STRING)
