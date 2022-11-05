@@ -19,6 +19,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @EnableJpaAuditing
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "tickets")
 public class Ticket {
     @Id

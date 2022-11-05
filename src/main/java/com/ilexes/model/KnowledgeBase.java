@@ -5,8 +5,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Entity
@@ -23,5 +23,5 @@ public class KnowledgeBase {
     @JoinColumn(name = "application_name", referencedColumnName = "name")
     private Application application;
     @OneToMany(mappedBy = "knowledgeBase", targetEntity = Article.class, cascade = CascadeType.ALL)
-    private List<Article> articles = new ArrayList<>();
+    private Set<Article> articles = new HashSet<>();
 }
