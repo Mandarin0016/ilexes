@@ -23,8 +23,11 @@ public class BillingPlan {
     @Column(columnDefinition = "TEXT")
     private String description;
     private BigDecimal price;
-    @OneToMany(targetEntity = Application.class)
-    @JoinTable
+    @ManyToMany(targetEntity = Application.class)
+    @JoinTable(
+            name = "billing_plans_applications",
+            joinColumns = @JoinColumn(name = "plan_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "application_id", referencedColumnName = "id"))
     private Set<Application> applicationsIncluded;
     @Enumerated(EnumType.STRING)
     private SupportScope supportScope;
