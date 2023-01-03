@@ -1,4 +1,4 @@
-package com.ilexes.model;
+package com.ilexes.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ilexes.model.enums.AccountStatus;

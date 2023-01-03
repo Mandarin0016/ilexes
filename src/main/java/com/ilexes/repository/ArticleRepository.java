@@ -1,2 +1,4 @@
-package com.ilexes.repository;public interface ArticleRepository {
+package com.ilexes.repository;
+
+public interface ArticleRepository {
 }

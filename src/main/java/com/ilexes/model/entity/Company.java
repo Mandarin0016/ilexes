@@ -1,4 +1,4 @@
-package com.ilexes.model;
+package com.ilexes.model.entity;
 
 import com.ilexes.model.enums.CompanyType;
 import lombok.Data;

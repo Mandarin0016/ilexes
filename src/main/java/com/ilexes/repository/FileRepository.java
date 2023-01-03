@@ -1,4 +1,4 @@
 package com.ilexes.repository;
 
-public interface UserRepository {
+public interface FileRepository {
 }

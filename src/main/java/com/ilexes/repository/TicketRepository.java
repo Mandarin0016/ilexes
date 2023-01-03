@@ -1,2 +1,4 @@
-package com.ilexes.repository;public interface TIcketRepository {
+package com.ilexes.repository;
+
+public interface TicketRepository {
 }

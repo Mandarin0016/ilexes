@@ -1,4 +1,4 @@
-package com.ilexes.model;
+package com.ilexes.model.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

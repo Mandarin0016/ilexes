@@ -1,2 +1,4 @@
-package com.ilexes.repository;public interface CompanyRepository {
+package com.ilexes.repository;
+
+public interface CompanyRepository {
 }

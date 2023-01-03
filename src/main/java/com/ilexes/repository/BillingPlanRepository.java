@@ -1,2 +1,4 @@
-package com.ilexes.repository;public interface BillingPlanRepository {
+package com.ilexes.repository;
+
+public interface BillingPlanRepository {
 }

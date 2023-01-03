@@ -1,4 +1,4 @@
-package com.ilexes.model;
+package com.ilexes.model.entity;
 
 import com.ilexes.model.enums.Continent;
 import com.ilexes.model.enums.Region;

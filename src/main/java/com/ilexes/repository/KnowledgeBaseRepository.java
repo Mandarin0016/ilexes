@@ -1,2 +1,4 @@
-package com.ilexes.repository;public interface KnowledgeBaseRepository {
+package com.ilexes.repository;
+
+public interface KnowledgeBaseRepository {
 }

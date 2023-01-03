@@ -1,2 +1,4 @@
-package com.ilexes.repository;public interface LocationRepository {
+package com.ilexes.repository;
+
+public interface LocationRepository {
 }
