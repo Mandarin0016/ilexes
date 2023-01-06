@@ -21,17 +21,12 @@ public class KnowledgeBaseServiceImpl implements KnowledgeBaseService {
     }
 
     @Override
-    public Collection<KnowledgeBaseExposeDTO> findByApplication(Application application) {
-        return null;
-    }
-
-    @Override
     public KnowledgeBaseExposeDTO create(KnowledgeBaseSeedDTO knowledgeBaseSeedDTO) {
         return null;
     }
 
     @Override
-    public KnowledgeBaseExposeDTO update(KnowledgeBaseSeedDTO knowledgeBaseSeedDTO) {
+    public KnowledgeBaseExposeDTO update(KnowledgeBaseSeedDTO knowledgeBaseSeedDTO, Long id) {
         return null;
     }
 

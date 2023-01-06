@@ -10,9 +10,8 @@ public interface KnowledgeBaseService {
 
     Collection<KnowledgeBaseExposeDTO> findAll();
     KnowledgeBaseExposeDTO findById(Long id);
-    Collection<KnowledgeBaseExposeDTO> findByApplication(Application application);
     KnowledgeBaseExposeDTO create(KnowledgeBaseSeedDTO knowledgeBaseSeedDTO);
-    KnowledgeBaseExposeDTO update(KnowledgeBaseSeedDTO knowledgeBaseSeedDTO);
+    KnowledgeBaseExposeDTO update(KnowledgeBaseSeedDTO knowledgeBaseSeedDTO, Long id);
     void deleteById(Long id);
 
 

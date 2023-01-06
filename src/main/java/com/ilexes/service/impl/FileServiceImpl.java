@@ -20,22 +20,12 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public Collection<FileExposeDTO> findByName(String fileName) {
-        return null;
-    }
-
-    @Override
-    public Collection<FileExposeDTO> findByUrl(String fileUrl) {
-        return null;
-    }
-
-    @Override
     public FileExposeDTO create(FileSeedDTO fileSeedDTO) {
         return null;
     }
 
     @Override
-    public FileExposeDTO update(FileSeedDTO fileSeedDTO) {
+    public FileExposeDTO update(FileSeedDTO fileSeedDTO, Long id) {
         return null;
     }
 

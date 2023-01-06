@@ -21,12 +21,12 @@ public class SurveyServiceImpl implements SurveyService {
     }
 
     @Override
-    public Collection<SurveyExposeDTO> findBySatisfactionLevel(SatisfactionLevel satisfactionLevel) {
+    public Collection<SurveyExposeDTO> findAllBySatisfactionLevel(SatisfactionLevel satisfactionLevel) {
         return null;
     }
 
     @Override
-    public SurveyExposeDTO update(SurveySeedDTO surveySeedDTO) {
+    public SurveyExposeDTO update(SurveySeedDTO surveySeedDTO, Long id) {
         return null;
     }
 

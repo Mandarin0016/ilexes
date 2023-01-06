@@ -8,8 +8,7 @@ import java.util.Collection;
 public interface ApplicationService {
     Collection<ApplicationExposeDTO> findAll();
     ApplicationExposeDTO findById(Long id);
-    ApplicationExposeDTO findByName(String name);
-    ApplicationExposeDTO update(ApplicationSeedDTO applicationSeedDTO);
+    ApplicationExposeDTO update(ApplicationSeedDTO applicationSeedDTO, Long id);
     ApplicationExposeDTO create(ApplicationSeedDTO applicationSeedDTO);
     void deleteById(Long id);
 

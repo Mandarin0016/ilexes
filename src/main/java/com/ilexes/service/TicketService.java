@@ -11,11 +11,9 @@ public interface TicketService {
     Collection<TicketExposeDTO> findAll();
     TicketExposeDTO findById(Long id);
 
-    Collection<TicketExposeDTO> findByState(State state);
+    Collection<TicketExposeDTO> findAllByState(State state);
 
-    Collection<TicketExposeDTO> findByCustomer(Customer customer);
-
-    TicketExposeDTO update(TicketSeedDTO ticketSeedDTO);
+    TicketExposeDTO update(TicketSeedDTO ticketSeedDTO, Long id);
 
     TicketExposeDTO create(TicketSeedDTO ticketSeedDTO);
 

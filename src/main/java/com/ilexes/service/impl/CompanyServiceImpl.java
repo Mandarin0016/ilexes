@@ -21,7 +21,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public CompanyExposeDTO findByType(CompanyType companyType) {
+    public Collection<CompanyExposeDTO> findAllByType(CompanyType companyType) {
         return null;
     }
 

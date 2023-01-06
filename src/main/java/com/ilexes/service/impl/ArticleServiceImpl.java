@@ -20,12 +20,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public ArticleExposeDTO findByTitle(String title) {
-        return null;
-    }
-
-    @Override
-    public ArticleExposeDTO update(ArticleSeedDTO articleSeedDTO) {
+    public ArticleExposeDTO update(ArticleSeedDTO articleSeedDTO, Long id) {
         return null;
     }
 

@@ -9,7 +9,7 @@ public interface GroupService {
 
     Collection<GroupExposeDTO> findAll();
     GroupExposeDTO findById(Long id);
-    GroupExposeDTO update(GroupSeedDTO groupSeedDTO);
+    GroupExposeDTO update(GroupSeedDTO groupSeedDTO, Long id);
     GroupExposeDTO create(GroupSeedDTO groupSeedDTO);
     void deleteById(Long id);
 }

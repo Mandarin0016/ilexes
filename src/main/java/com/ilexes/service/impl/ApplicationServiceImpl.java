@@ -19,13 +19,9 @@ public class ApplicationServiceImpl implements ApplicationService {
         return null;
     }
 
-    @Override
-    public ApplicationExposeDTO findByName(String name) {
-        return null;
-    }
 
     @Override
-    public ApplicationExposeDTO update(ApplicationSeedDTO applicationSeedDTO) {
+    public ApplicationExposeDTO update(ApplicationSeedDTO applicationSeedDTO, Long id) {
         return null;
     }
 

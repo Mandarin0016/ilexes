@@ -20,7 +20,7 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public GroupExposeDTO update(GroupSeedDTO groupSeedDTO) {
+    public GroupExposeDTO update(GroupSeedDTO groupSeedDTO, Long id) {
         return null;
     }
 

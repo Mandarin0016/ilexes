@@ -11,9 +11,9 @@ public interface SurveyService {
     Collection<SurveyExposeDTO> findAll();
     SurveyExposeDTO findById(Long id);
 
-    Collection<SurveyExposeDTO> findBySatisfactionLevel(SatisfactionLevel satisfactionLevel);
+    Collection<SurveyExposeDTO> findAllBySatisfactionLevel(SatisfactionLevel satisfactionLevel);
 
-    SurveyExposeDTO update(SurveySeedDTO surveySeedDTO);
+    SurveyExposeDTO update(SurveySeedDTO surveySeedDTO, Long id);
 
     SurveyExposeDTO create(SurveySeedDTO surveySeedDTO);
 

@@ -8,8 +8,7 @@ import java.util.Collection;
 public interface ArticleService {
     Collection<ArticleExposeDTO> findAll();
     ArticleExposeDTO findById(Long id);
-    ArticleExposeDTO findByTitle(String title);
-    ArticleExposeDTO update(ArticleSeedDTO articleSeedDTO);
+    ArticleExposeDTO update(ArticleSeedDTO articleSeedDTO, Long id);
     ArticleExposeDTO create(ArticleSeedDTO articleSeedDTO);
     void deleteById(Long id);
 
