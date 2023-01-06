@@ -10,7 +10,7 @@ public interface CompanyService {
 
     Collection<CompanyExposeDTO> findAll();
     CompanyExposeDTO findById(Long id);
-    CompanyExposeDTO findByType(CompanyType companyType);
+    Collection<CompanyExposeDTO> findAllByType(CompanyType companyType);
     CompanyExposeDTO update(CompanySeedDTO companySeedDTO, Long id);
     CompanyExposeDTO create(CompanySeedDTO companySeedDTO);
     void deleteById(Long id);
