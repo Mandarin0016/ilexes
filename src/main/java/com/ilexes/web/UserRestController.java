@@ -18,6 +18,7 @@ import static com.ilexes.util.ErrorHandlingUtil.handleValidationErrors;
 @RequestMapping("/users")
 public class UserRestController {
 
+
     private final UserService userService;
 
     public UserRestController(UserService userService) {

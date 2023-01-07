@@ -57,8 +57,4 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    @Override
-    public void verify(String email, String code) {
-
-    }
 }

@@ -20,13 +20,10 @@ public class Application {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Long id;
-    @Min(2)
     @Column(nullable = false, columnDefinition = "VARCHAR(50)", unique = true)
     private String name;
     @Column(columnDefinition = "TEXT")
     private String description;
-    @URL
     private String photoUrl;
-    @URL
     private String website;
 }
