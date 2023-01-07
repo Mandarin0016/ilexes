@@ -20,6 +20,8 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Long id;
+    @Column(unique = true)
+    private String companyName;
     private String information;
     @URL
     private String companyWebsite;

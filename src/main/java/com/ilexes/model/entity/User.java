@@ -48,7 +48,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
     @Enumerated(EnumType.STRING)
-    private AccountStatus accountStatus;
+    private AccountStatus accountStatus = AccountStatus.ACTIVE;
     @ManyToOne(targetEntity = Company.class)
     private Company company;
     @ManyToOne(targetEntity = Location.class)
