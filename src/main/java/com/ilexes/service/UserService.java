@@ -2,7 +2,6 @@ package com.ilexes.service;
 
 import com.ilexes.model.dto.expose.user.UserExposeDTO;
 import com.ilexes.model.dto.seed.user.UserSeedDTO;
-import com.ilexes.web.UserCompanyRegistrationInformationSeedDTO;
 
 import java.util.Collection;
 
