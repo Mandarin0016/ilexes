@@ -13,6 +13,4 @@ public interface UserService {
     UserExposeDTO update(UserSeedDTO userSeedDTO, Long id);
     void deleteById(Long id);
 
-    void verify(String email, String code);
-
 }
