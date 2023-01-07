@@ -11,6 +11,6 @@ public interface ApplicationService {
     ApplicationExposeDTO findById(Long id) throws NonExistingEntityException;
     ApplicationExposeDTO update(ApplicationSeedDTO applicationSeedDTO, Long id);
     ApplicationExposeDTO create(ApplicationSeedDTO applicationSeedDTO);
-    void deleteById(Long id);
+    boolean deleteById(Long id);
 
 }

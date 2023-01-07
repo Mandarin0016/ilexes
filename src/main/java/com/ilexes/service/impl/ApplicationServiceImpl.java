@@ -8,6 +8,7 @@ import com.ilexes.model.entity.Application;
 import com.ilexes.repository.ApplicationRepository;
 import com.ilexes.service.ApplicationService;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -18,6 +19,7 @@ public class ApplicationServiceImpl implements ApplicationService {
     private final ApplicationRepository applicationRepository;
     private final ModelMapper modelMapper;
 
+    @Autowired
     public ApplicationServiceImpl(ApplicationRepository applicationRepository, ModelMapper modelMapper) {
         this.applicationRepository = applicationRepository;
         this.modelMapper = modelMapper;
@@ -39,10 +41,12 @@ public class ApplicationServiceImpl implements ApplicationService {
 
     }
 
-
     @Override
     public ApplicationExposeDTO update(ApplicationSeedDTO applicationSeedDTO, Long id) {
-        return null;
+        Application application = applicationRepository.findById(id).orElseThrow(() -> new NonExistingEntityException(String.format(ExceptionMessages.APPLICATION_DOES_NOT_EXIST, id)));
+        modelMapper.map(applicationSeedDTO, application);
+        applicationRepository.save(application);
+        return modelMapper.map(application, ApplicationExposeDTO.class);
     }
 
     @Override
@@ -52,7 +56,11 @@ public class ApplicationServiceImpl implements ApplicationService {
     }
 
     @Override
-    public void deleteById(Long id) {
-
+    public boolean deleteById(Long id) {
+        if (applicationRepository.existsById(id)) {
+            applicationRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }
