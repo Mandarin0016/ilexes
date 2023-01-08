@@ -43,7 +43,8 @@ public class ApplicationServiceImpl implements ApplicationService {
 
     @Override
     public ApplicationExposeDTO update(ApplicationSeedDTO applicationSeedDTO, Long id) {
-        Application application = applicationRepository.findById(id).orElseThrow(() -> new NonExistingEntityException(String.format(ExceptionMessages.APPLICATION_DOES_NOT_EXIST, id)));
+        Application application = applicationRepository.findById(id)
+                .orElseThrow(() -> new NonExistingEntityException(String.format(ExceptionMessages.APPLICATION_DOES_NOT_EXIST, id)));
         modelMapper.map(applicationSeedDTO, application);
         applicationRepository.save(application);
         return modelMapper.map(application, ApplicationExposeDTO.class);
@@ -67,5 +68,10 @@ public class ApplicationServiceImpl implements ApplicationService {
     @Override
     public Long count() {
         return applicationRepository.count();
+    }
+
+    @Override
+    public Collection<ApplicationExposeDTO> findAllByName(Collection<String> name) {
+        return applicationRepository.findAllByNameIn(name).stream().map(application -> modelMapper.map(application, ApplicationExposeDTO.class)).collect(Collectors.toList());
     }
 }

@@ -35,7 +35,6 @@ public class ExceptionHandlerControllerAdvice {
                 .stream()
                 .map(e -> String.format(ExceptionMessages.FIELD_ERROR_MESSAGE, e.getDefaultMessage(), e.getField(), e.getRejectedValue()))
                 .toList();
-
         return ResponseEntity
                 .badRequest()
                 .body(new ExceptionResponseDTO(HttpStatus.BAD_REQUEST.value(), ExceptionMessages.INVALID_DATA_PROVIDED, fieldErrorMessages));

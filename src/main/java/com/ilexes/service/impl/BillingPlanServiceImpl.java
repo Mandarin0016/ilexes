@@ -1,22 +1,42 @@
 package com.ilexes.service.impl;
 
+import com.ilexes.exception.ExceptionMessages;
+import com.ilexes.exception.NonExistingEntityException;
+import com.ilexes.model.dto.expose.application.ApplicationExposeDTO;
 import com.ilexes.model.dto.expose.billingPlan.BillingPlanExposeDTO;
 import com.ilexes.model.dto.seed.billingPlan.BillingPlanSeedDTO;
+import com.ilexes.model.entity.Application;
+import com.ilexes.model.entity.BillingPlan;
+import com.ilexes.repository.BillingPlanRepository;
 import com.ilexes.service.BillingPlanService;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
 @Service
 public class BillingPlanServiceImpl implements BillingPlanService {
+
+    private final BillingPlanRepository billingPlanRepository;
+    private final ModelMapper modelMapper;
+
+    @Autowired
+    public BillingPlanServiceImpl(BillingPlanRepository billingPlanRepository, ModelMapper modelMapper) {
+        this.billingPlanRepository = billingPlanRepository;
+        this.modelMapper = modelMapper;
+    }
+
     @Override
     public Collection<BillingPlanExposeDTO> findAll() {
-        return null;
+        return billingPlanRepository.findAll().stream().map(plan -> modelMapper.map(plan, BillingPlanExposeDTO.class)).toList();
     }
 
     @Override
     public BillingPlanExposeDTO findById(Long id) {
-        return null;
+        return billingPlanRepository.findById(id)
+                .map(plan -> modelMapper.map(plan, BillingPlanExposeDTO.class))
+                .orElseThrow(() -> new NonExistingEntityException(String.format(ExceptionMessages.BILLING_PLAN_DOES_NOT_EXIST, id)));
     }
 
     @Override
@@ -26,11 +46,30 @@ public class BillingPlanServiceImpl implements BillingPlanService {
 
     @Override
     public BillingPlanExposeDTO create(BillingPlanSeedDTO billingPlanSeedDTO) {
-        return null;
+        BillingPlan plan = billingPlanRepository.save(modelMapper.map(billingPlanSeedDTO, BillingPlan.class));
+        return modelMapper.map(plan, BillingPlanExposeDTO.class);
     }
 
     @Override
     public void deleteById(Long id) {
+        BillingPlan billingPlan = billingPlanRepository.findById(id)
+                .orElseThrow(() -> new NonExistingEntityException(String.format(ExceptionMessages.BILLING_PLAN_DOES_NOT_EXIST, id)));
+        billingPlan.getApplicationsIncluded().clear();
+        billingPlanRepository.save(billingPlan);
+        billingPlanRepository.deleteById(id);
+    }
 
+    @Override
+    public Long count() {
+        return billingPlanRepository.count();
+    }
+
+    @Override
+    public Collection<ApplicationExposeDTO> addNewApplications(Long id, Collection<ApplicationExposeDTO> applications) {
+        BillingPlan billingPlan = billingPlanRepository.findById(id)
+                .orElseThrow(() -> new NonExistingEntityException(String.format(ExceptionMessages.BILLING_PLAN_DOES_NOT_EXIST, id)));
+        billingPlan.getApplicationsIncluded().addAll(applications.stream().map(dto -> modelMapper.map(dto, Application.class)).toList());
+        billingPlanRepository.save(billingPlan);
+        return billingPlan.getApplicationsIncluded().stream().map(app -> modelMapper.map(app, ApplicationExposeDTO.class)).toList();
     }
 }

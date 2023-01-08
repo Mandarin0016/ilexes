@@ -3,11 +3,9 @@ package com.ilexes.model.entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.URL;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 
 @Data
 @Entity
