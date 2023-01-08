@@ -1,11 +1,14 @@
 package com.ilexes.web;
 
+import com.ilexes.exception.ExceptionMessages;
 import com.ilexes.model.dto.expose.application.ApplicationExposeDTO;
 import com.ilexes.model.dto.expose.billingPlan.BillingPlanExposeDTO;
 import com.ilexes.model.dto.seed.billingPlan.BillingPlanSeedDTO;
 import com.ilexes.service.ApplicationService;
 import com.ilexes.service.BillingPlanService;
+import com.ilexes.util.CommonMessages;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +19,6 @@ import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static com.ilexes.util.CommonMessages.BILLING_PLANS_COUNT;
 import static com.ilexes.util.ErrorHandlingUtil.handleValidationErrors;
 
 @RestController
@@ -45,6 +47,7 @@ public class BillingPlanRestController {
         Collection<ApplicationExposeDTO> applications = applicationService.findAllByName(Arrays.stream(name).toList());
         return billingPlanService.addNewApplications(id, applications);
     }
+
     @GetMapping()
     public Collection<BillingPlanExposeDTO> findAll() {
         return billingPlanService.findAll();
@@ -54,6 +57,7 @@ public class BillingPlanRestController {
     public BillingPlanExposeDTO findById(@PathVariable("id") Long id) {
         return billingPlanService.findById(id);
     }
+
     @GetMapping("/count")
     public Long count() {
         return billingPlanService.count();
@@ -64,6 +68,12 @@ public class BillingPlanRestController {
         handleValidationErrors(errors);
         BillingPlanExposeDTO billingPlanExposeDTO = billingPlanService.update(billingPlanSeedDTO, id);
         return ResponseEntity.ok(billingPlanExposeDTO);
+    }
+
+    @DeleteMapping("/{id:\\d+}")
+    public ResponseEntity<String> deleteById(@PathVariable("id") Long id) {
+        billingPlanService.deleteById(id);
+        return new ResponseEntity<>(CommonMessages.SUCCESSFULLY_DELETED_RESOURCE, HttpStatus.OK);
     }
 
 }

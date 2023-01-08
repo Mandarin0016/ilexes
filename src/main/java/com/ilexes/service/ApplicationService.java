@@ -15,7 +15,7 @@ public interface ApplicationService {
 
     ApplicationExposeDTO create(ApplicationSeedDTO applicationSeedDTO);
 
-    boolean deleteById(Long id);
+    void deleteById(Long id);
 
     Long count();
     Collection<ApplicationExposeDTO> findAllByName(Collection<String> name);

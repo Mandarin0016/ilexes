@@ -8,10 +8,16 @@ import java.util.Collection;
 
 public interface BillingPlanService {
     Collection<BillingPlanExposeDTO> findAll();
+
     BillingPlanExposeDTO findById(Long id);
+
     BillingPlanExposeDTO update(BillingPlanSeedDTO billingPlanSeedDTO, Long id);
+
     BillingPlanExposeDTO create(BillingPlanSeedDTO billingPlanSeedDTO);
+
     void deleteById(Long id);
+
     Long count();
+
     Collection<ApplicationExposeDTO> addNewApplications(Long id, Collection<ApplicationExposeDTO> applications);
 }

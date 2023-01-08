@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 
 import static com.ilexes.exception.ExceptionMessages.BILLING_PLAN_DOES_NOT_EXIST;
+import static com.ilexes.exception.ExceptionMessages.RESOURCE_WITH_ID_DOES_NOT_EXIST;
 
 @Service
 public class BillingPlanServiceImpl implements BillingPlanService {
@@ -63,8 +64,10 @@ public class BillingPlanServiceImpl implements BillingPlanService {
 
     @Override
     public void deleteById(Long id) {
-        BillingPlan billingPlan = billingPlanRepository.findById(id)
-                .orElseThrow(() -> new NonExistingEntityException(String.format(BILLING_PLAN_DOES_NOT_EXIST, id)));
+        if (!billingPlanRepository.existsById(id)) {
+            throw new NonExistingEntityException(String.format(RESOURCE_WITH_ID_DOES_NOT_EXIST, id));
+        }
+        BillingPlan billingPlan = billingPlanRepository.findById(id).get();
         billingPlan.getApplicationsIncluded().clear();
         billingPlanRepository.save(billingPlan);
         billingPlanRepository.deleteById(id);

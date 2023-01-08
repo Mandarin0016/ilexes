@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+import static com.ilexes.exception.ExceptionMessages.BILLING_PLAN_DOES_NOT_EXIST;
+
 @Service
 public class ApplicationServiceImpl implements ApplicationService {
     private final ApplicationRepository applicationRepository;
@@ -37,7 +39,7 @@ public class ApplicationServiceImpl implements ApplicationService {
     public ApplicationExposeDTO findById(Long id) throws NonExistingEntityException {
         return applicationRepository.findById(id)
                 .map(app -> modelMapper.map(app, ApplicationExposeDTO.class))
-                .orElseThrow(() -> new NonExistingEntityException(String.format(ExceptionMessages.USER_DOES_NOT_EXIST, id)));
+                .orElseThrow(() -> new NonExistingEntityException(String.format(ExceptionMessages.APPLICATION_DOES_NOT_EXIST, id)));
 
     }
 
@@ -57,12 +59,11 @@ public class ApplicationServiceImpl implements ApplicationService {
     }
 
     @Override
-    public boolean deleteById(Long id) {
-        if (applicationRepository.existsById(id)) {
-            applicationRepository.deleteById(id);
-            return true;
+    public void deleteById(Long id) {
+        if (!applicationRepository.existsById(id)) {
+            throw new NonExistingEntityException(String.format(ExceptionMessages.RESOURCE_WITH_ID_DOES_NOT_EXIST, id));
         }
-        return false;
+        applicationRepository.deleteById(id);
     }
 
     @Override

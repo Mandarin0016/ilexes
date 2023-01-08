@@ -40,7 +40,7 @@ public class ApplicationRestController {
     @PostMapping()
     public ResponseEntity<ApplicationExposeDTO> create(@Valid @RequestBody ApplicationSeedDTO applicationSeedDTO, Errors errors) {
         handleValidationErrors(errors);
-        ApplicationExposeDTO applicationExposeDTO =  applicationService.create(applicationSeedDTO);
+        ApplicationExposeDTO applicationExposeDTO = applicationService.create(applicationSeedDTO);
         return ResponseEntity
                 .created(ServletUriComponentsBuilder.fromCurrentRequest().pathSegment("{id}").buildAndExpand(applicationExposeDTO.getId()).toUri())
                 .body(applicationExposeDTO);
@@ -48,9 +48,8 @@ public class ApplicationRestController {
 
     @DeleteMapping("/{id:\\d+}")
     public ResponseEntity<String> deleteById(@PathVariable("id") Long id) {
-        boolean isDeleted = applicationService.deleteById(id);
-        return isDeleted ? new ResponseEntity<>(CommonMessages.SUCCESSFULLY_DELETED_RESOURCE, HttpStatus.OK)
-                : new ResponseEntity<>(String.format(CommonMessages.RESOURCE_WITH_ID_DOES_NOT_EXIST, id), HttpStatus.NOT_FOUND);
+        applicationService.deleteById(id);
+        return new ResponseEntity<>(CommonMessages.SUCCESSFULLY_DELETED_RESOURCE, HttpStatus.OK);
     }
 
     @PutMapping("/{id:\\d+}")
