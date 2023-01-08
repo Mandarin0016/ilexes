@@ -16,6 +16,7 @@ import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.Collection;
 
+import static com.ilexes.util.CommonMessages.BILLING_PLANS_COUNT;
 import static com.ilexes.util.ErrorHandlingUtil.handleValidationErrors;
 
 @RestController
@@ -44,4 +45,25 @@ public class BillingPlanRestController {
         Collection<ApplicationExposeDTO> applications = applicationService.findAllByName(Arrays.stream(name).toList());
         return billingPlanService.addNewApplications(id, applications);
     }
+    @GetMapping()
+    public Collection<BillingPlanExposeDTO> findAll() {
+        return billingPlanService.findAll();
+    }
+
+    @GetMapping("/{id:\\d+}")
+    public BillingPlanExposeDTO findById(@PathVariable("id") Long id) {
+        return billingPlanService.findById(id);
+    }
+    @GetMapping("/count")
+    public Long count() {
+        return billingPlanService.count();
+    }
+
+    @PutMapping("/{id:\\d+}")
+    public ResponseEntity<BillingPlanExposeDTO> update(@Valid @RequestBody BillingPlanSeedDTO billingPlanSeedDTO, @PathVariable("id") Long id, Errors errors) {
+        handleValidationErrors(errors);
+        BillingPlanExposeDTO billingPlanExposeDTO = billingPlanService.update(billingPlanSeedDTO, id);
+        return ResponseEntity.ok(billingPlanExposeDTO);
+    }
+
 }
