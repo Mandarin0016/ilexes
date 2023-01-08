@@ -32,7 +32,6 @@ public class Company {
     private CompanyType companyType;
     @OneToMany(mappedBy = "company", targetEntity = User.class)
     private Set<User> employees = new HashSet<>();
-    @JoinColumn(nullable = false)
     @ManyToOne(targetEntity = BillingPlan.class)
     private BillingPlan billingPlan;
 }

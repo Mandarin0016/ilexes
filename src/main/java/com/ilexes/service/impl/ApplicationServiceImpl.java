@@ -10,11 +10,11 @@ import com.ilexes.service.ApplicationService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-import static com.ilexes.exception.ExceptionMessages.BILLING_PLAN_DOES_NOT_EXIST;
 
 @Service
 public class ApplicationServiceImpl implements ApplicationService {
@@ -59,11 +59,21 @@ public class ApplicationServiceImpl implements ApplicationService {
     }
 
     @Override
+    @Transactional
     public void deleteById(Long id) {
         if (!applicationRepository.existsById(id)) {
             throw new NonExistingEntityException(String.format(ExceptionMessages.RESOURCE_WITH_ID_DOES_NOT_EXIST, id));
         }
+        String name = findById(id).getName();
+        detachApplication(id, name);
         applicationRepository.deleteById(id);
+    }
+
+    private void detachApplication(Long id, String name) {
+        applicationRepository.detachRelationBillingPlanApplications(id);
+        applicationRepository.detachRelationKnowledgeBases(name);
+        applicationRepository.detachRelationSupportGroupApplications(id);
+        applicationRepository.detachRelationTickets(name);
     }
 
     @Override
@@ -74,5 +84,12 @@ public class ApplicationServiceImpl implements ApplicationService {
     @Override
     public Collection<ApplicationExposeDTO> findAllByName(Collection<String> name) {
         return applicationRepository.findAllByNameIn(name).stream().map(application -> modelMapper.map(application, ApplicationExposeDTO.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public ApplicationExposeDTO findByName(String name) {
+        return applicationRepository.findByName(name)
+                .map(app -> modelMapper.map(app, ApplicationExposeDTO.class))
+                .orElseThrow(() -> new NonExistingEntityException(String.format(ExceptionMessages.APPLICATION_WITH_NAME_DOES_NOT_EXIST, name)));
     }
 }

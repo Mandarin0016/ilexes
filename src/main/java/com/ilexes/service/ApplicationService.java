@@ -18,5 +18,8 @@ public interface ApplicationService {
     void deleteById(Long id);
 
     Long count();
+
     Collection<ApplicationExposeDTO> findAllByName(Collection<String> name);
+
+    ApplicationExposeDTO findByName(String name);
 }

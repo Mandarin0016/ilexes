@@ -19,5 +19,9 @@ public interface BillingPlanService {
 
     Long count();
 
-    Collection<ApplicationExposeDTO> addNewApplications(Long id, Collection<ApplicationExposeDTO> applications);
+    Collection<ApplicationExposeDTO> addApplications(Long id, Collection<ApplicationExposeDTO> applications);
+
+    Collection<ApplicationExposeDTO> removeApplication(Long id, String name);
+
+    Collection<ApplicationExposeDTO> findAllApplications(Long id);
 }

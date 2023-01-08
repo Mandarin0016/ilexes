@@ -1,6 +1,5 @@
 package com.ilexes.web;
 
-import com.ilexes.exception.ExceptionMessages;
 import com.ilexes.model.dto.expose.application.ApplicationExposeDTO;
 import com.ilexes.model.dto.expose.billingPlan.BillingPlanExposeDTO;
 import com.ilexes.model.dto.seed.billingPlan.BillingPlanSeedDTO;
@@ -33,21 +32,6 @@ public class BillingPlanRestController {
         this.applicationService = applicationService;
     }
 
-    @PostMapping
-    public ResponseEntity<BillingPlanExposeDTO> create(@Valid @RequestBody BillingPlanSeedDTO billingPlanSeedDTO, Errors errors) {
-        handleValidationErrors(errors);
-        BillingPlanExposeDTO billingPlanExposeDTO = billingPlanService.create(billingPlanSeedDTO);
-        return ResponseEntity
-                .created(ServletUriComponentsBuilder.fromCurrentRequest().pathSegment("{id}").buildAndExpand(billingPlanExposeDTO.getId()).toUri())
-                .body(billingPlanExposeDTO);
-    }
-
-    @PostMapping("/{id:\\d+}/applications")
-    public Collection<ApplicationExposeDTO> addNewApplication(@PathVariable("id") Long id, @RequestBody String... name) {
-        Collection<ApplicationExposeDTO> applications = applicationService.findAllByName(Arrays.stream(name).toList());
-        return billingPlanService.addNewApplications(id, applications);
-    }
-
     @GetMapping()
     public Collection<BillingPlanExposeDTO> findAll() {
         return billingPlanService.findAll();
@@ -58,9 +42,13 @@ public class BillingPlanRestController {
         return billingPlanService.findById(id);
     }
 
-    @GetMapping("/count")
-    public Long count() {
-        return billingPlanService.count();
+    @PostMapping
+    public ResponseEntity<BillingPlanExposeDTO> create(@Valid @RequestBody BillingPlanSeedDTO billingPlanSeedDTO, Errors errors) {
+        handleValidationErrors(errors);
+        BillingPlanExposeDTO billingPlanExposeDTO = billingPlanService.create(billingPlanSeedDTO);
+        return ResponseEntity
+                .created(ServletUriComponentsBuilder.fromCurrentRequest().pathSegment("{id}").buildAndExpand(billingPlanExposeDTO.getId()).toUri())
+                .body(billingPlanExposeDTO);
     }
 
     @PutMapping("/{id:\\d+}")
@@ -76,4 +64,24 @@ public class BillingPlanRestController {
         return new ResponseEntity<>(CommonMessages.SUCCESSFULLY_DELETED_RESOURCE, HttpStatus.OK);
     }
 
+    @GetMapping("/count")
+    public Long count() {
+        return billingPlanService.count();
+    }
+
+    @PostMapping("/{id:\\d+}/applications")
+    public Collection<ApplicationExposeDTO> addNewApplication(@PathVariable("id") Long id, @RequestBody String... name) {
+        Collection<ApplicationExposeDTO> applications = applicationService.findAllByName(Arrays.stream(name).toList());
+        return billingPlanService.addApplications(id, applications);
+    }
+
+    @DeleteMapping("/{id:\\d+}/applications")
+    public Collection<ApplicationExposeDTO> removeApplication(@PathVariable("id") Long id, @RequestParam(name = "name", defaultValue = "") String name) {
+        return billingPlanService.removeApplication(id, name);
+    }
+
+    @GetMapping("/{id:\\d+}/applications")
+    public Collection<ApplicationExposeDTO> findAllApplications(@PathVariable("id") Long id) {
+        return billingPlanService.findAllApplications(id);
+    }
 }
