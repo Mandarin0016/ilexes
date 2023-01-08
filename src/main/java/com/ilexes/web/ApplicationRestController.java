@@ -60,4 +60,9 @@ public class ApplicationRestController {
         return ResponseEntity.ok(applicationExposedDTO);
     }
 
+    @GetMapping("/count")
+    public Long count() {
+        return applicationService.count();
+    }
+
 }
