@@ -66,7 +66,6 @@ public class ApplicationServiceImpl implements ApplicationService {
 
     @Override
     public Long count() {
-
         return applicationRepository.count();
     }
 }
