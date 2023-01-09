@@ -1,5 +1,4 @@
 package com.ilexes.web;
-
 import com.ilexes.model.dto.expose.file.FileExposeDTO;
 import com.ilexes.model.dto.seed.file.FileSeedDTO;
 import com.ilexes.service.FileService;
@@ -9,14 +8,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.util.Collection;
-
 import static com.ilexes.util.ErrorHandlingUtil.handleValidationErrors;
 
 @RestController
-@RequestMapping("/file")
+@RequestMapping("/files")
 public class FileRestController {
 
     private final FileService fileService;
@@ -41,11 +39,13 @@ public class FileRestController {
         return fileService.count();
     }
 
-
     @PostMapping()
-    public FileExposeDTO create(@Valid @RequestBody FileSeedDTO fileSeedDTO, Errors errors) {
+    public ResponseEntity<FileExposeDTO> create(@Valid @RequestBody FileSeedDTO fileSeedDTO, Errors errors) {
         handleValidationErrors(errors);
-        return fileService.create(fileSeedDTO);
+        FileExposeDTO fileExposeDTO = fileService.create(fileSeedDTO);
+        return ResponseEntity
+                .created(ServletUriComponentsBuilder.fromCurrentRequest().pathSegment("{id}").buildAndExpand(fileExposeDTO.getId()).toUri())
+                .body(fileExposeDTO);
     }
 
     //при ъпдейт клиента не е нужен да дава всички параметри на файла, modelMaper-a ще игнорира нъл стойностите и ще ъпдейтне само каквото сме му подали :)

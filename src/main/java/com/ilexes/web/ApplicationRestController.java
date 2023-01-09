@@ -1,5 +1,4 @@
 package com.ilexes.web;
-
 import com.ilexes.model.dto.expose.application.ApplicationExposeDTO;
 import com.ilexes.model.dto.seed.application.ApplicationSeedDTO;
 import com.ilexes.service.ApplicationService;
@@ -10,10 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import javax.validation.Valid;
 import java.util.Collection;
-
 import static com.ilexes.util.ErrorHandlingUtil.handleValidationErrors;
 
 @RestController

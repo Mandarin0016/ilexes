@@ -10,4 +10,5 @@ public class ExceptionMessages {
     public static final String FIELD_ERROR_MESSAGE = "%s for %s = %s";
     public static final String GLOBAL_ERROR_MESSAGE = "%s";
     public static final String INVALID_DATA_PROVIDED = "Invalid data provided.";
+    public static final String LOCATION_DOES_NOT_EXIST = "Location with ID '%s' does not exist.";
 }

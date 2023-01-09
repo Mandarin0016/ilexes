@@ -22,15 +22,9 @@ public class Location {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Long id;
-    @Min(4)
-    @Max(30)
     private String address;
-    @Min(4)
-    @Max(30)
     @Column(nullable = false)
     private String country;
-    @Min(4)
-    @Max(30)
     @Column(nullable = false)
     private String city;
     @Column(nullable = false)

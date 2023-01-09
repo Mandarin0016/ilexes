@@ -10,6 +10,7 @@ public interface LocationService {
     LocationExposeDTO update(LocationSeedDTO locationSeedDTO, Long id);
     Collection<LocationExposeDTO> findAll();
     LocationExposeDTO findById(Long id);
+    Long count();
     void deleteById(Long id);
 
 }
