@@ -11,11 +11,11 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.config.Configuration;
 import org.modelmapper.convention.MatchingStrategies;
 import org.modelmapper.convention.NamingConventions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
-import static com.ilexes.exception.ExceptionMessages.BILLING_PLAN_DOES_NOT_EXIST;
 import static com.ilexes.exception.ExceptionMessages.RESOURCE_WITH_ID_DOES_NOT_EXIST;
 
 @Service
@@ -23,6 +23,7 @@ public class FileServiceImpl implements FileService {
     private final FileRepository fileRepository;
     private final ModelMapper modelMapper;
 
+    @Autowired
     public FileServiceImpl(FileRepository fileRepository, ModelMapper modelMapper) {
         this.fileRepository = fileRepository;
         this.modelMapper = modelMapper;
@@ -53,13 +54,6 @@ public class FileServiceImpl implements FileService {
     @Override
     public FileExposeDTO update(FileSeedDTO fileSeedDTO, Long id) {
         InputFile file = fileRepository.findById(id).orElseThrow(() -> new NonExistingEntityException(String.format(ExceptionMessages.FILE_DOES_NOT_EXIST, id)));
-        modelMapper.getConfiguration()
-                .setFieldMatchingEnabled(true)
-                .setMatchingStrategy(MatchingStrategies.LOOSE)
-                .setFieldAccessLevel(Configuration.AccessLevel.PRIVATE)
-                .setSkipNullEnabled(true)
-                .setSourceNamingConvention(NamingConventions.JAVABEANS_MUTATOR);
-        modelMapper.map(fileSeedDTO, file);
         fileRepository.save(file);
         return modelMapper.map(file, FileExposeDTO.class);
     }

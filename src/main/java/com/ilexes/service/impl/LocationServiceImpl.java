@@ -11,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.config.Configuration;
 import org.modelmapper.convention.MatchingStrategies;
 import org.modelmapper.convention.NamingConventions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -22,6 +23,7 @@ public class LocationServiceImpl implements LocationService {
     private final ModelMapper modelMapper;
     private final LocationRepository locationRepository;
 
+    @Autowired
     public LocationServiceImpl(ModelMapper modelMapper, LocationRepository locationRepository) {
         this.modelMapper = modelMapper;
         this.locationRepository = locationRepository;
@@ -57,12 +59,6 @@ public class LocationServiceImpl implements LocationService {
     @Override
     public LocationExposeDTO update(LocationSeedDTO locationSeedDTO, Long id) {
         Location location = locationRepository.findById(id).orElseThrow(() -> new NonExistingEntityException(String.format(ExceptionMessages.LOCATION_DOES_NOT_EXIST, id)));
-        modelMapper.getConfiguration()
-                .setFieldMatchingEnabled(true)
-                .setMatchingStrategy(MatchingStrategies.LOOSE)
-                .setFieldAccessLevel(Configuration.AccessLevel.PRIVATE)
-                .setSkipNullEnabled(true)
-                .setSourceNamingConvention(NamingConventions.JAVABEANS_MUTATOR);
         modelMapper.map(locationSeedDTO, location);
         locationRepository.save(location);
         return modelMapper.map(location, LocationExposeDTO.class);

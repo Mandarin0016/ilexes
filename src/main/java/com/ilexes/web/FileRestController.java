@@ -48,7 +48,6 @@ public class FileRestController {
                 .body(fileExposeDTO);
     }
 
-    //при ъпдейт клиента не е нужен да дава всички параметри на файла, modelMaper-a ще игнорира нъл стойностите и ще ъпдейтне само каквото сме му подали :)
     @PutMapping("/{id:\\d+}")
     public FileExposeDTO update(@Valid @RequestBody FileSeedDTO fileSeedDTO, @PathVariable("id") Long id, Errors errors) {
         handleValidationErrors(errors);

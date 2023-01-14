@@ -21,6 +21,7 @@ public class InputFile {
     @Column(columnDefinition = "TEXT")
     private String fileName;
     @URL
+    @Column(unique = true)
     private String fileUrl;
 
     public InputFile(String fileName, String fileUrl) {
