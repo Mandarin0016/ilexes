@@ -3,6 +3,9 @@ import com.ilexes.model.dto.expose.file.FileExposeDTO;
 import com.ilexes.model.dto.seed.file.FileSeedDTO;
 import com.ilexes.service.FileService;
 import com.ilexes.util.CommonMessages;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +18,24 @@ import static com.ilexes.util.ErrorHandlingUtil.handleValidationErrors;
 
 @RestController
 @RequestMapping("/files")
+@Tag(name = "File Controller")
+@ApiResponses(value = {
+        @ApiResponse(
+                responseCode = "200",
+                description = "Request was successful."),
+        @ApiResponse(
+                responseCode = "400",
+                description = "You made a bad request."),
+        @ApiResponse(
+                responseCode = "401",
+                description = "You did not have valid credentials."),
+        @ApiResponse(
+                responseCode = "403",
+                description = "You do not have permission to execute a request."),
+        @ApiResponse(
+                responseCode = "500",
+                description = "An internal server error occurred.")})
+
 public class FileRestController {
 
     private final FileService fileService;
