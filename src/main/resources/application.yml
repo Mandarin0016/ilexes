@@ -3,7 +3,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/ilexes?createDatabaseIfNotExist=true
     username: root
-    password: 3360
+    password: avatar3020
   #  JPA Properties
   jpa:
     show-sql: true
@@ -45,6 +45,9 @@ info:
     description: REST MVC demo with Spring Boot and Spring Data JPA
     version: 1.0-SNAPSHOT
 
+server:
+  servlet:
+    context-path: "/"
 logging:
   level:
     org.hibernate.SQL: info
